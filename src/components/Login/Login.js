@@ -1,9 +1,19 @@
 import React from 'react'
+import { useState } from 'react'
 
 const Login = () => {
   
-  function handleChange() {
+  const [loginFormData, setLoginFormData] = useState({
+    email: "",
+    password: "",
+  })
 
+  function handleChange(event) {
+    const { name, value } = event.target
+    setLoginFormData(prevLoginFormData => ({
+      ...prevLoginFormData,
+      [name] : value
+    }))
   }
   function handleSubmit() {
 
@@ -21,7 +31,7 @@ const Login = () => {
             type="email"
             placeholer="Email Address"
             onChange={handleChange}
-            value={'email-state'}
+            value={loginFormData.email}
           >
           </input>
           <input
@@ -29,7 +39,7 @@ const Login = () => {
             type="password"
             placeholer="Password"
             onChange={handleChange}
-            value={'password-state'}
+            value={loginFormData.password}
           >
           </input>
           <button className="form-submit">
