@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
+
 async function loginUser(email, password) {  
   return fetch(`http://localhost:5000/api/v1/sessions`, {
     method: 'POST',
@@ -26,7 +27,8 @@ async function loginUser(email, password) {
 const Login = () => {
   const [currentUser, setCurrentUser] = useState()
 
-  console.log(`currentUser: ${currentUser}`)
+  console.log(currentUser?.id)
+
 
   const [loginFormData, setLoginFormData] = useState({
     email: "",
@@ -49,7 +51,7 @@ const Login = () => {
       email,
       password
     );
-    setCurrentUser(result);
+    console.log(result.id)
   }
 
 
