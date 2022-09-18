@@ -4,14 +4,22 @@ const StateContext = createContext()
 
 const initialUserState = {
   userId: "",
-  email: "",
-  apiKey: "",
+  userEmail: "",
+  userApiKey: "",
 }
 
 export const ContextProvider = ({ children }) => {
   const [activeUser, setActiveUser] = useState(false)
   const [currentUser, setCurrentUser] = useState(initialUserState)
-  
+  // const [currentUser, setCurrentUser] = useState()
+
+  const updateCurrentUser = (value) => {
+    setCurrentUser(({
+      ...initialUserState,
+      value
+    }))
+  }
+
   return (
     <StateContext.Provider
       value={{
@@ -19,6 +27,7 @@ export const ContextProvider = ({ children }) => {
         setActiveUser,
         currentUser,
         setCurrentUser,
+        updateCurrentUser
       }}>
 
         {children} 

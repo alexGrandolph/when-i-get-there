@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { useStateContext } from '../../contexts/ContextProvider.js'
 
 
 async function loginUser(email, password) {  
@@ -25,9 +26,9 @@ async function loginUser(email, password) {
 
 
 const Login = () => {
-  const [currentUser, setCurrentUser] = useState()
-
-  console.log(currentUser?.id)
+  // const [currentUser, setCurrentUser] = useState()
+  const { currentUser, setCurrentUser, activeUser, setActiveUser, updateCurrentUser } = useStateContext()
+  console.log(currentUser)
 
 
   const [loginFormData, setLoginFormData] = useState({
@@ -43,6 +44,8 @@ const Login = () => {
     }));
   }
 
+
+
    async function handleSubmit(event) {
     event.preventDefault();
     const email = loginFormData.email
@@ -51,7 +54,18 @@ const Login = () => {
       email,
       password
     );
-    console.log(result.id)
+    const userId = result.id
+    const userEmail = result.attributes.email
+    const userApiKey =  result.attributes.api_key
+
+    setCurrentUser({      
+      userId: userId,
+      userEmail: userEmail,
+      userApiKey: userApiKey
+    })
+    // console.log(result)
+    // updateUser(userObj)
+    // console.log(currentUser)
   }
 
 

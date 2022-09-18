@@ -1,10 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useStateContext } from '../../contexts/ContextProvider.js'
 
 const LandingPage = () => {
+  // const { currentUser, setCurrentUser, activeUser, setActiveUser, updateCurrentUser } = useStateContext()
+
   return (
     <div className="landing-page-wrapper">
-
+      {/* {[currentUser]} */}
       <div className="weather-search-container">
         <h1>Searh for Weather</h1>
         <Link to="/weather">
