@@ -27,9 +27,10 @@ async function loginUser(email, password) {
 
 
 const Login = () => {
-  const { currentUser, setCurrentUser, activeUser, setActiveUser, addUserToStorage } = useStateContext()
+  const { currentUser, setCurrentUser, activeUser, setActiveUser, addUserToStorage, checkStorage } = useStateContext()
   console.log(currentUser)
-
+  const check = checkStorage()
+  console.log(check)
 
   const [loginFormData, setLoginFormData] = useState({
     email: "",
@@ -64,6 +65,8 @@ const Login = () => {
       userEmail: userEmail,
       userApiKey: userApiKey,
     }))
+    const check = checkStorage()
+    console.log(check)
   }
 
 

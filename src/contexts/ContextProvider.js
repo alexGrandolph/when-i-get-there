@@ -11,11 +11,20 @@ const initialUserState = {
 export const ContextProvider = ({ children }) => {
   const [activeUser, setActiveUser] = useState(false)
   const [currentUser, setCurrentUser] = useState(initialUserState)
-  // const [currentUser, setCurrentUser] = useState()
+  const [userStored, setUserStored] = useState(false)
+
+  const checkStorage = () => {
+    if (localStorage.getItem("sessionId") === '' ||
+      localStorage.getItem("sessionId") === null ) {
+      return false
+    } else {
+      return true
+    }
+  }
 
   const addUserToStorage = (userId) => {
-    // const sessionId = userID
-    localStorage.setItem("sessionId", userId)
+    const storedInt = parseInt(userId, 10)
+    localStorage.setItem("sessionId", storedInt)
     setActiveUser(true)
   }
 
@@ -27,6 +36,7 @@ export const ContextProvider = ({ children }) => {
         currentUser,
         setCurrentUser,
         addUserToStorage,
+        checkStorage,
       }}>
 
         {children} 

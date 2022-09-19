@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom'
 import { useStateContext } from '../../contexts/ContextProvider.js'
 
 const LandingPage = () => {
-  const { currentUser, setCurrentUser, activeUser, setActiveUser, updateCurrentUser } = useStateContext()
-  console.log(currentUser)
-  console.log(activeUser)    
-  if (!currentUser) {
-  
+  const { currentUser, activeUser, checkStorage } = useStateContext()
+
+  const check = checkStorage()
+  console.log(check)
+
+  if (!check) {
     return (
 
       <div className="landing-page-wrapper">
@@ -32,13 +33,14 @@ const LandingPage = () => {
           </Link>
         </div>
       </div>
-    ) } else {
-      return (
-        <div>
-          Good to go
-        </div>
-      )
-    }
+    )
+  } else {
+    return (
+      <div>
+        good to go
+      </div>
+    )
+  }
 }
 
 export default LandingPage
