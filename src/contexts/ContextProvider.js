@@ -13,11 +13,10 @@ export const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(initialUserState)
   // const [currentUser, setCurrentUser] = useState()
 
-  const updateCurrentUser = (value) => {
-    setCurrentUser(({
-      ...initialUserState,
-      value
-    }))
+  const addUserToStorage = (userId) => {
+    // const sessionId = userID
+    localStorage.setItem("sessionId", userId)
+    setActiveUser(true)
   }
 
   return (
@@ -27,7 +26,7 @@ export const ContextProvider = ({ children }) => {
         setActiveUser,
         currentUser,
         setCurrentUser,
-        updateCurrentUser
+        addUserToStorage,
       }}>
 
         {children} 

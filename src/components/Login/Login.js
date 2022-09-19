@@ -1,9 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
 import { useStateContext } from '../../contexts/ContextProvider.js'
+import { Link } from 'react-router-dom'
 
 
 async function loginUser(email, password) {  
+
   return fetch(`http://localhost:5000/api/v1/sessions`, {
     method: 'POST',
     headers: {
@@ -19,15 +21,13 @@ async function loginUser(email, password) {
       return res.json();
     })
     .then(data => {
-      // console.log(data.data);
-      return data.data
+      return data.data;
     })
 }
 
 
 const Login = () => {
-  // const [currentUser, setCurrentUser] = useState()
-  const { currentUser, setCurrentUser, activeUser, setActiveUser, updateCurrentUser } = useStateContext()
+  const { currentUser, setCurrentUser, activeUser, setActiveUser, addUserToStorage } = useStateContext()
   console.log(currentUser)
 
 
@@ -44,8 +44,6 @@ const Login = () => {
     }));
   }
 
-
-
    async function handleSubmit(event) {
     event.preventDefault();
     const email = loginFormData.email
@@ -57,22 +55,24 @@ const Login = () => {
     const userId = result.id
     const userEmail = result.attributes.email
     const userApiKey =  result.attributes.api_key
+    
+    addUserToStorage(userId)
 
-    setCurrentUser({      
+    setCurrentUser(prevCurrentUser => ({
+      ...prevCurrentUser,
       userId: userId,
       userEmail: userEmail,
-      userApiKey: userApiKey
-    })
-    // console.log(result)
-    // updateUser(userObj)
-    // console.log(currentUser)
+      userApiKey: userApiKey,
+    }))
   }
 
 
   
   return (
     <div className='login-container'>
-      
+      <Link to="/">
+        HOme
+      </Link>
       <h1>Please Login to Your Account</h1>
       
       <div className="form-container">
