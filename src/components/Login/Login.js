@@ -65,8 +65,9 @@ const Login = () => {
       userEmail: userEmail,
       userApiKey: userApiKey,
     }))
+    console.log(currentUser) // this returns initalUserState which is all empty values 
     const check = checkStorage()
-    console.log(check)
+    console.log(check) // returns undefined idk why
   }
 
 
