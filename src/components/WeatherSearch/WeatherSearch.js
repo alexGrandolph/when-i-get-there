@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const WeatherSearch = () => {
   
-  const [cityName, setCityName] = useState("")
+  const [citySearch, setCitySearch] = useState("")
   
   function handleChange(event) {
 
@@ -24,21 +24,30 @@ const WeatherSearch = () => {
             className="form-input"
             type="text"
             placeholer="Enter a City"
-            name="cityName"
+            name="citySearch"
             onChange={handleChange}
-            value={cityName}
+            value={citySearch}
           >
           </input>
           <button className="form-submit">
             Search
           </button>
-      
-      
-      
-      
         </form>
-
       </div>
+
+      <div className="current-weather-container">
+        Current Weather
+      </div>
+
+      <div className="hourly-forecast-container">
+        Hourly Forecast
+      </div>
+
+      <div className="daily-forecast-container">
+        Daily Forecast
+      </div>
+
+
     </div>
   )
 }
