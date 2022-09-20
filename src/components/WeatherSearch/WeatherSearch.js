@@ -13,8 +13,21 @@ export const fetchPlace = async (text) => {
   }
 };
 
+async function getForecast(city, country) {
+  return fetch(`http://localhost:5000/api/v1/forecast?location=${city},${country}`)
+  .then(res => {
+    // console.log(res)
+    return res.json();
+  })
+  .then(data => {
+    // console.log(data.data.attributes)
+    return data.data.attributes
+  })
+}
+
 
 const WeatherSearch = () => {
+  
   const [city, setCity] = useState("");
   const [autocompleteCities, setAutocompleteCities] = useState([]);
   const [autocompleteErr, setAutocompleteErr] = useState("");
@@ -30,8 +43,17 @@ const WeatherSearch = () => {
     res.error ? setAutocompleteErr(res.error) : setAutocompleteErr("");
   };
 
+  async function handleSubmit(event ){
+    event.preventDefault();
+   
+    const cityName = city.split(', ')[0]
+    const country = city.split(', ').pop()
+    const result = await getForecast(cityName, country);
+    console.log(result.current_weather.temperature)
+  }
+
   return (
-    <form>
+    <form className = "form" onSubmit = { handleSubmit }>
       <div className="placesAutocomplete">
         <div className="placesAutocomplete__inputWrap">
           <label htmlFor="city" className="label">
