@@ -58,7 +58,7 @@ const Login = () => {
     const userApiKey =  result.attributes.api_key
     
     addUserToStorage(userId)
-
+      
     setCurrentUser(prevCurrentUser => ({
       ...prevCurrentUser,
       userId: userId,
